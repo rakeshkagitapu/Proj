@@ -54,7 +54,7 @@ namespace SPFS.Controllers
                     System.Web.HttpContext.Current.User = principal;
 
                     
-                    this.Logger.Log( model.UserName + " Logged in",Logging.LoggingLevel.Info);
+                    Logger.Log( model.UserName + " Logged in",Logging.LoggingLevel.Info);
 
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
 
