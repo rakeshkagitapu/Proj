@@ -84,8 +84,12 @@ namespace SPFS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-           // AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            Utilities utils = new Utilities();            
+            Logger.Log(utils.GetCurrentUser().UserName + " Logged out",Logging.LoggingLevel.Info);
+            FormsAuthentication.SignOut();
+            Response.Cookies[FormsAuthentication.FormsCookieName].Expires = DateTime.Now.AddDays(-1);
+            System.Web.HttpContext.Current.User = null;
+            return View("Login");
         }
         
         protected override void Dispose(bool disposing)

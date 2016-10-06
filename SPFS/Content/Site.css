@@ -30,6 +30,11 @@ html, body {
     color:white;
 }
 
+.navbar-default .navbar-text
+{
+    color:white;
+}
+
 .labelWhite
 {
     color:white;

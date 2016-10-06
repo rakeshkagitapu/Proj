@@ -62,11 +62,9 @@ namespace SPFS.Helpers
         /// <exception cref="Exception"></exception>
         public SPFS_USERS GetCurrentUser()
         {
-
             //return new User() { ADUserID = "xyz", UserName = "Test" };
             SPFS.DAL.SPFSEntities db = new SPFSEntities();
-
-
+            
             IQueryable<SPFS_USERS> users = db.SPFS_USERS.Where(p => p.UserName== CurrentUserName);
             if (users != null && users.Count() > 0)
             {
