@@ -11,55 +11,77 @@
 
 </head>
 <body>
-    <p>@Html.Partial("_SpfsHeader") </p>  
+    <p>@Html.Partial("_SpfsHeader") </p>
     <div id="mainContainer" class="container container-with-nav">
         <div id="divNavbarWrapper" class="navbar navbar-default navbar-static-top">
             <div class="row" style="background-color: #1398d0">
-                <div class="navbar-header">                                    
-                        <button type="button" class="navbar-toggle collapsed"
-                                data-toggle="collapse" data-target="#divMainNavbar"
-                                aria-expanded="false">
-                            <span class="sr-only">Toggle Navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>                    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#divMainNavbar"
+                            aria-expanded="false">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                 </div>
                 <div id="divMainNavbar" class="collapse navbar-collapse">
                     @Html.Partial("_LoginPartial")
-                        <ul class="nav navbar-nav navbar-left" style="padding-left:5px;">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <ul class="nav navbar-nav navbar-left" style="padding-left:5px;">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
-                            <li role="presentation" class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                    Ratings<span class="caret" />
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Ratings Manual", "Create", "Ratings")</li>
-                                    <li>@Html.ActionLink("Ratings Upload", "Upload", "Ratings")</li>
-                                    <li>@Html.ActionLink("All Ratings", "Index", "Orders")</li>
-                                </ul>
-                            </li>
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Ratings<span class="caret" />
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Ratings Manual", "Create", "Ratings")</li>
+                                <li>@Html.ActionLink("Ratings Upload", "Upload", "Ratings")</li>
+                                <li>@Html.ActionLink("All Ratings", "Index", "Orders")</li>
+                            </ul>
+                        </li>
 
-                            <li role="presentation" class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                    Admin<span class="caret" />
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Register New User", "Create", "Users")</li>
-                                    <li>@Html.ActionLink("View/Edit Existing Users", "Index", "Users")</li>
-                                    <li>@Html.ActionLink("Move Ratings", "Index", "MoveRatings")</li>
-                                </ul>
-                            </li>
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Admin<span class="caret" />
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Register New User", "Create", "Users")</li>
+                                <li>@Html.ActionLink("View/Edit Existing Users", "Index", "Users")</li>
+                                <li>@Html.ActionLink("Move Ratings", "Index", "MoveRatings")</li>
+                            </ul>
+                        </li>
 
-                            <li>@Html.ActionLink("AboutUs", "AboutUs", "Home")</li>
+                        <li>@Html.ActionLink("AboutUs", "Contact", "Home")</li>
 
-                        </ul>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <div class="body-content" style="padding-left:20px; padding-right:20px">
+            <div id="divValidationSummary" class="form-horizontal" style="display: none;">
+                <div class="form-group">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-horizontal custom-validation-summary">
+                            <div class="form-group form-group-tight">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <h4 class="text-danger" style="padding-left: 11px;">
+                                        <span class="k-icon k-warning"></span>
+                                        <span style="padding: 0 0 0 4px;">Please correct the following Errors</span>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-tight">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <ul id="listValidationErrors"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="k-callout k-callout-n custom-callout"></div>
+                    </div>
+                </div>
+            </div>
             @RenderBody()
         </div>
     </div>
@@ -67,23 +89,23 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-  
+
     @*<script>
-        var area, areaSegment;
-        var host, hostSegment;
-        hostSegment = (location.hostname == "localhost") ? 0 : 1;
-        host = location.pathname.split('/')[hostSegment];
-        areaSegment = (location.hostname == "localhost") ? 1 : 2;
-        area = location.pathname.split("/")[areaSegment];
+            var area, areaSegment;
+            var host, hostSegment;
+            hostSegment = (location.hostname == "localhost") ? 0 : 1;
+            host = location.pathname.split('/')[hostSegment];
+            areaSegment = (location.hostname == "localhost") ? 1 : 2;
+            area = location.pathname.split("/")[areaSegment];
 
-        var selector = "a[href^='/" + host + "/" + area + "']:first";
+            var selector = "a[href^='/" + host + "/" + area + "']:first";
 
-        if (host == "") {
-            selector = "a[href^='/" + area + "']:first";
-        }
+            if (host == "") {
+                selector = "a[href^='/" + area + "']:first";
+            }
 
-        $(selector).parent().addClass("active");
-    </script>*@   
+            $(selector).parent().addClass("active");
+        </script>*@
 </body>
 
 </html>
