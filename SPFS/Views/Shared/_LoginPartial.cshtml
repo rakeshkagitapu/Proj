@@ -1,22 +1,36 @@
 ﻿@using Microsoft.AspNet.Identity
+@{
+    var ulClasses = "nav navbar-nav navbar-right";
+    var ulStyle = "height: 50px;";
+}
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="@ulClasses" style="@ulStyle">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <label class="navbar-text">
+                <span class="glyphicon glyphicon-user"></span>
+                @User.Identity.GetUserName()
+            </label>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li>
+            @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+            {
+                <button type="submit" class="btn btn-default navbar-btn control-level-permission" form="logoutForm">
+                    <span>Log Off</span>
+                    <span class="glyphicon glyphicon-log-out" style="margin-left: 4px;"></span>
+                </button>
+            }
+        </li>
     </ul>
-    }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <ul class="@ulClasses" style="@ulStyle">
+        <li>
+            <button type="button" class="btn btn-default navbar-btn control-level-permission" onclick="window.location='@Url.Action("Login", "Account", routeValues: null)';">
+                <span class="glyphicon glyphicon-log-in" style="margin-right: 4px;"></span>
+                <span>Log In</span>
+            </button>
+        </li>
     </ul>
 }

@@ -1,9 +1,37 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+html, body {
+    height: 100%;
+    background-color: #4685A9;
+    background-image: url('../Images/gradient_3.png');
+    background-repeat: repeat-x;
+}
+
+#divNavbarWrapper {
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
+#divMainNavbar.navbar-collapse {
+    padding: 0px;
+}
+
+#mainContainer.container {
+    padding-top: 70px;
+    padding-bottom: 47px;
+    min-height: 100%;
+    background-color: #fff;
+}
+
+#divMainNavbar.navbar-collapse {
+    padding: 0px;
 }
 
 .navbar-default .navbar-brand {
+    color:white;
+}
+
+.labelWhite
+{
     color:white;
 }
 .navbar-default .navbar-nav > li > a
@@ -23,3 +51,32 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.field-validation-error {
+    border-radius: 0;
+    border-top: 1px solid #d9534f;
+    border-right: 1px solid #d9534f;
+    border-bottom: 1px solid #d9534f;
+    border-left: 3px solid #d9534f;
+    background-color: #fdf7f7;
+    color: #d9534f;
+    font-size: 14px;
+    margin: 7px;
+    padding: 4px 5px 4px 6px;
+    text-align: left;
+    width: auto;
+    line-height: normal;
+    position: relative;
+    display: inline-block;
+    margin-top: 13px;
+}
+
+.custom-validation-summary {
+    border-top: 1px solid #d9534f;
+    border-right: 1px solid #d9534f;
+    border-bottom: 1px solid #d9534f;
+    border-left: 3px solid #d9534f;
+    background-color: #fdf7f7;
+    /*padding: 1px 11px;*/
+}
+
