@@ -1,0 +1,191 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title - DVS-PCard</title>
+
+    @Styles.Render("~/Content/css")
+
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    @Scripts.Render("~/bundles/jquery")
+    <link href="@Url.Content("~/Content/kendo/2015.1.408/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.408/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.408/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.408/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.408/kendo.dataviz.default.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.408/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.408/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.408/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+
+    <link href="~/Content/styles.css" rel="stylesheet" />
+</head>
+<body style="padding:0">
+    <div class="row">
+        <div style="align-self: stretch;">
+            <p>@Html.Partial("_FFXHeader") </p>
+        </div>
+    </div>
+
+    <div id="mainContainer" class="container" style="padding-left:0; padding-right:0; padding-top:40px">
+        <div id="divNavbarWrapper" class="navbar navbar-default navbar-static-top">
+
+            <div class="row">
+                <div class="navbar-header">
+                    <div class="col-sm-1 col-xs-9 col-xs-offset-1">
+                        <ul class="nav navbar-nav navbar-left" style="vertical-align:central;">
+                            @Html.ActionLink("DVS-PCard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "padding-top: 10,0,0,0; margin:0; height:auto; width:95px" })
+                        </ul>
+                    </div>
+                    <div class="col-xs-0 ">
+                        <button type="button" class="navbar-toggle collapsed"
+                                data-toggle="collapse" data-target="#divMainNavbar"
+                                aria-expanded="false">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="divMainNavbar" class="collapse navbar-collapse">
+
+                    <div class="col-sm-10">
+                        <ul class="nav navbar-nav navbar-left" style="padding-left:5px;">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Orders<span class="caret" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Create New Order", "Create", "Orders")</li>
+                                    <li>@Html.ActionLink("All Orders", "Index", "Orders")</li>
+                                    <li>@Html.ActionLink("Edit Orders", "EditOrders", "Orders")</li>
+                                    <li>@Html.ActionLink("Orders with Invoices Added Today", "InvoicesAddedToday", "Orders")</li>
+                                    <li>@Html.ActionLink("Orders with Pending Invoices", "OrdersWithPendingInvoices", "Orders")</li>
+                                    <li>@Html.ActionLink("All Orders with Invoices", "OrderInvoices", "Orders")</li>
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Invoices<span class="caret" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("All Invoices", "Index", "Invoices")</li>
+                                    <li>@Html.ActionLink("Invoices Added Today", "InvoicesAddedToday", "Invoices")</li>
+                                    <li>@Html.ActionLink("Approve Pending Invoices", "ApprovePendingInvoices", "Invoices")</li>
+                                    <li>@Html.ActionLink("Invoices not reported On Credit Cards", "InvoicesNotReportedByCreditCard", "Invoices")</li>
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Card <span class="caret" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Card Transactions", "Index", "CardTransactions")</li>
+                                    <li>@Html.ActionLink("Transactions not reported by Parts Shop", "TransactionsNotInPartsShop", "CardTransactions")</li>
+                                    <li>@Html.ActionLink("Non-contract vendors' Transactions", "NonContractTransactions", "CardTransactions")</li>
+                                    <li>@Html.ActionLink("Monitored Vendors' Transactions", "MonitoredVendorsTransactions", "CardTransactions")</li>                                    
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Vendors<span class="caret" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("County Vendors", "Index", "CountyVendors")</li>
+                                    <li>@Html.ActionLink("Card Vendors", "Index", "CardVendors")</li>
+                                    <li>@Html.ActionLink("Map New Card Vendors", "MapNewCardVendors", "CardVendors")</li>
+                                    <li>@Html.ActionLink("Automatically Matched Card Vendors", "CardVendorsMatchedToday", "CardVendors")</li>
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Accounting<span class="caret" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Import Bank Statements", "ImportBankStatements", "ImportData")</li>
+                                    <li>@Html.ActionLink("Reconcile Transactions", "ReconcileTransactions", "Invoices")</li>
+                                    <li>@Html.ActionLink("Audit Report", "AuditReport", "CardTransactions")</li>
+                                    <li>@Html.ActionLink("JE Upload", "JEUpload", "CardTransactions")</li>                                    
+                                    <li>@Html.ActionLink("Find Duplicate Transactions", "FindDuplicateTransactions", "CardTransactions")</li>                                    
+                                </ul>
+                            </li>
+
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Admin<span class="caret" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Register New User", "Create", "Users")</li>
+                                    <li>@Html.ActionLink("View/Edit Existing Users", "Index", "Users")</li>
+                                    <li>@Html.ActionLink("Credit Cards", "Index", "CreditCards")</li>
+                                </ul>
+                            </li>
+
+                        </ul>
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                DVS_PCard.Helpers.Utilities utils = new DVS_PCard.Helpers.Utilities();
+                                
+                                @Html.AntiForgeryToken()
+
+                                <ul class="nav navbar-nav navbar-right" style="margin-right:5px;">
+                                    <li role="presentation" class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+
+                                            Hello, @utils.GetCurrentUser().UserName (@utils.GetRolesForCurrentUser()[0])
+                                            <span class="caret" />
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                        </ul>                                        
+                                    </li>                                    
+                                </ul>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="body-content" style="padding-left:20px; padding-right:20px">
+            @RenderBody()
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/RootLayout.js")
+    @RenderSection("scripts", required: false)
+    @Html.Partial("_FFXFooter")
+
+    <script type="text/javascript">
+
+        function error_handler(e) {
+            if (e.errors) {
+
+                this.cancelChanges();
+
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    
+    </script>
+</body>
+</html>

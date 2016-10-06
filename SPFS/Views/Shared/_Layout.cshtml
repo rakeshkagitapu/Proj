@@ -1,0 +1,110 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body style="padding:0">    
+    <div class="row">
+        <div style="align-self: stretch;">
+            <p>@Html.Partial("_SpfsHeader") </p>
+        </div>
+    </div>
+  
+
+    <div id="mainContainer" class="container" style="padding-left:0; padding-right:0; padding-top:40px">
+        <div id="divNavbarWrapper" class="navbar navbar-default navbar-static-top">
+
+            <div class="row" style="background:#1398d0">
+                <div class="navbar-header">
+                    <div class="col-sm-1 col-xs-9 col-xs-offset-1">
+                        <ul class="nav navbar-nav navbar-left" style="vertical-align:central;">
+                            @Html.ActionLink("SPFS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "padding-top: 10,0,0,0; margin:0; height:auto; width:95px" })
+                        </ul>
+                    </div>
+                    <div class="col-xs-0 ">
+                        <button type="button" class="navbar-toggle collapsed"
+                                data-toggle="collapse" data-target="#divMainNavbar"
+                                aria-expanded="false">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="divMainNavbar" class="collapse navbar-collapse">
+                    <div class="col-sm-10">
+                        <ul class="nav navbar-nav navbar-left" style="padding-left:5px;">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Ratings<span class="caret" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Ratings Manual", "Create", "Ratings")</li>
+                                    <li>@Html.ActionLink("Ratings Upload", "Upload", "Ratings")</li>
+                                    <li>@Html.ActionLink("All Ratings", "Index", "Orders")</li>                                  
+                                </ul>
+                            </li>                         
+
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Admin<span class="caret" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Register New User", "Create", "Users")</li>
+                                    <li>@Html.ActionLink("View/Edit Existing Users", "Index", "Users")</li>
+                                    <li>@Html.ActionLink("Move Ratings", "Index", "MoveRatings")</li>
+                                </ul>
+                            </li>
+
+                            <li>@Html.ActionLink("AboutUs", "AboutUs", "Home")</li>
+
+                        </ul>
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                SPFS.Helpers.Utilities utils = new SPFS.Helpers.Utilities();
+
+                                @Html.AntiForgeryToken()
+
+                                <ul class="nav navbar-nav navbar-right" style="margin-right:5px;">
+                                    <li role="presentation" class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+
+                                            Hello, @utils.GetCurrentUser().UserName (@utils.GetRolesForCurrentUser()[0])
+                                            <span class="caret" />
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="body-content" style="padding-left:20px; padding-right:20px">
+            @RenderBody()
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @Html.Partial("_SpfsFooter")
+</body>
+</html>
