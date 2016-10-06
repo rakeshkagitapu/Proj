@@ -6,6 +6,10 @@
 .navbar-default .navbar-brand {
     color:white;
 }
+.navbar-default .navbar-nav > li > a
+{
+     color:white;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
