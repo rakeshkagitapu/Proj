@@ -18,7 +18,7 @@ using System.Threading;
 
 namespace SPFS.Controllers
 {   
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         public AccountController()
         {
@@ -53,8 +53,8 @@ namespace SPFS.Controllers
 
                     System.Web.HttpContext.Current.User = principal;
 
-                    //ILog log = LogManager.GetLogger("AccountController.asax");
-                    //log.Info(model.UserName + " Logged in");
+                    
+                    this.Logger.Log( model.UserName + " Logged in",Logging.LoggingLevel.Info);
 
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
 
