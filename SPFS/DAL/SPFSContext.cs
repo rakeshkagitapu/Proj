@@ -8,7 +8,7 @@ namespace SPFS.DAL
     public partial class SPFSContext : DbContext
     {
         public SPFSContext()
-            : base("name=SPFSContext1")
+            : base("name=SPFSContext")
         {
         }
 
@@ -21,6 +21,7 @@ namespace SPFS.DAL
         public virtual DbSet<SPFS_SUPPLIERS> SPFS_SUPPLIERS { get; set; }
         public virtual DbSet<SPFS_USERS> SPFS_USERS { get; set; }
         public virtual DbSet<SPFS_USERSITES> SPFS_USERSITES { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

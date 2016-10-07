@@ -8,7 +8,6 @@ namespace SPFS.DAL
 
     public partial class SPFS_SPEND_SUPPLIERS
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SPFS_SPEND_SUPPLIERS()
         {
             SPFS_LINK_ERP = new HashSet<SPFS_LINK_ERP>();
@@ -41,17 +40,14 @@ namespace SPFS.DAL
         [StringLength(50)]
         public string Modified_by { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SPFS_LINK_ERP> SPFS_LINK_ERP { get; set; }
 
         public virtual SPFS_SITES SPFS_SITES { get; set; }
 
         public virtual SPFS_SUPPLIERS SPFS_SUPPLIERS { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SPFS_STAGING_SUPPLIER_RATINGS> SPFS_STAGING_SUPPLIER_RATINGS { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SPFS_SUPPLIER_RATINGS> SPFS_SUPPLIER_RATINGS { get; set; }
     }
 }

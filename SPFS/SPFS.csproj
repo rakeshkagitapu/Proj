@@ -177,6 +177,7 @@
     <Compile Include="DAL\SPFS_SUPPLIER_RATINGS.cs" />
     <Compile Include="DAL\SPFS_USERS.cs" />
     <Compile Include="DAL\SPFS_USERSITES.cs" />
+    <Compile Include="DAL\sysdiagram.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

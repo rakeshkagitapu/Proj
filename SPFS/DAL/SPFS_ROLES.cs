@@ -8,7 +8,6 @@ namespace SPFS.DAL
 
     public partial class SPFS_ROLES
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SPFS_ROLES()
         {
             SPFS_USERS = new HashSet<SPFS_USERS>();
@@ -20,7 +19,6 @@ namespace SPFS.DAL
         [StringLength(30)]
         public string RoleName { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SPFS_USERS> SPFS_USERS { get; set; }
     }
 }
