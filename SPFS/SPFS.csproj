@@ -201,7 +201,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\danalogo.png" />
     <Content Include="Images\gradient_3.png" />
-    <Content Include="Logging\PSPD.Logging.csproj" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

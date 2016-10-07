@@ -63,13 +63,11 @@ namespace SPFS.Helpers
         public SPFS_USERS GetCurrentUser()
         {
             SPFS_USERS user = null;
-            //return new User() { ADUserID = "xyz", UserName = "Test" };
-            SPFS.DAL.SPFSContext db = new SPFSContext();
-
-            user = db.SPFS_USERS.Where(p => p.UserName== CurrentUserName).FirstOrDefault();
-            //else
-            //    throw new Exception(CANNOT_FIND_USER);
-            return user;
+            using (SPFSContext db = new SPFSContext())
+            {
+                user = db.SPFS_USERS.Where(p => p.UserName == CurrentUserName).FirstOrDefault();
+            }
+          return user;
         }
 
         /// <summary>

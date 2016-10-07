@@ -57,11 +57,12 @@ namespace SPFS.Controllers
                 }
                 else
                 {
-
                     ViewBag.ShowRatings = true;
+                    ViewBag.ShowAdmin = true;
                     if (controller.Equals("Account", StringComparison.InvariantCultureIgnoreCase) && action.Equals("LogOff", StringComparison.InvariantCultureIgnoreCase))
                     {
                         ViewBag.ShowRatings = false;
+                        ViewBag.ShowAdmin = false;
                     }
                     String[] roles = utils.GetRolesForCurrentUser();
                     GenericPrincipal principal = new GenericPrincipal(User.Identity, roles);
