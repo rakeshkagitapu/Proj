@@ -62,16 +62,14 @@ namespace SPFS.Helpers
         /// <exception cref="Exception"></exception>
         public SPFS_USERS GetCurrentUser()
         {
+            SPFS_USERS user = null;
             //return new User() { ADUserID = "xyz", UserName = "Test" };
-            SPFS.DAL.SPFSEntities db = new SPFSEntities();
-            
-            IQueryable<SPFS_USERS> users = db.SPFS_USERS.Where(p => p.UserName== CurrentUserName);
-            if (users != null && users.Count() > 0)
-            {
-                return users.FirstOrDefault();
-            }
-            else
-                throw new Exception(CANNOT_FIND_USER);
+            SPFS.DAL.SPFSContext db = new SPFSContext();
+
+            user = db.SPFS_USERS.Where(p => p.UserName== CurrentUserName).FirstOrDefault();
+            //else
+            //    throw new Exception(CANNOT_FIND_USER);
+            return user;
         }
 
         /// <summary>
@@ -117,9 +115,8 @@ namespace SPFS.Helpers
                 {
                     userName = CurrentUserName;
                 }
-
-                //DVS_PCardContext db = new DVS_PCardContext();                    
-                return new string[] { "Admin" };
+                SPFS.DAL.SPFSContext db = new SPFSContext();
+                return new string[] { db.SPFS_USERS.Include("SPFS_ROLES").Where(u => u.UserName == userName).FirstOrDefault().SPFS_ROLES.RoleName };
             }
             catch (Exception ex)
             {

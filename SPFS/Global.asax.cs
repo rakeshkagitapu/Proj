@@ -1,5 +1,6 @@
 ﻿using log4net;
 using SPFS.Helpers;
+using SPFS.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,18 +23,6 @@ namespace SPFS
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-
-        protected void Application_PostAuthenticateRequest()
-        {
-            if (Request.IsAuthenticated)
-            {
-                Utilities utils = new Utilities();
-                String[] roles = utils.GetRolesForCurrentUser();
-                GenericPrincipal principal = new GenericPrincipal(User.Identity, roles);
-                Thread.CurrentPrincipal = HttpContext.Current.User = principal;
-            }
-        }
-
         protected void Application_Error(Object sender, EventArgs e)
         {
             var raisedException = Server.GetLastError();
@@ -47,8 +36,8 @@ namespace SPFS
                 raisedException = raisedException.InnerException;
             }
 
-            ILog log = LogManager.GetLogger("Global.asax");
-            log.Error(innerException.ToString());
+            var _logger = new Logger();
+            _logger.Log(innerException.ToString(), LoggingLevel.Error);
 
             var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
             Response.Redirect(urlHelper.Action("Exception", "Account"));

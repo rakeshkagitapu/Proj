@@ -19,11 +19,7 @@ using System.Threading;
 namespace SPFS.Controllers
 {   
     public class AccountController : BaseController
-    {
-        public AccountController()
-        {
-        }
-
+    {       
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -65,7 +61,8 @@ namespace SPFS.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        //return RedirectToAction("Index", "Home");
+                        return RedirectToAction("LogOff", "Account");
                     }
                 }
                 else
@@ -78,28 +75,15 @@ namespace SPFS.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        [AllowAnonymous]
+        public ActionResult LogOff(string returnUrl)
         {
-            Utilities utils = new Utilities();            
-            Logger.Log(utils.GetCurrentUser().UserName + " Logged out",Logging.LoggingLevel.Info);
+            Utilities utils = new Utilities();
+            Logger.Log(utils.GetCurrentUser().UserName + " Logged out", Logging.LoggingLevel.Info);
             FormsAuthentication.SignOut();
             Response.Cookies[FormsAuthentication.FormsCookieName].Expires = DateTime.Now.AddDays(-1);
             System.Web.HttpContext.Current.User = null;
             return View("Login");
-        }
-        
-        protected override void Dispose(bool disposing)
-        {
-            //if (disposing && UserManager != null)
-            //{
-            //    UserManager.Dispose();
-            //    UserManager = null;
-            //}
-            base.Dispose(disposing);
         }
     }
 }
