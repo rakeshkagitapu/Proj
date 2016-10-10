@@ -43,6 +43,23 @@ html, body {
 {
      color:white;
 }
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+    color: #1398d0;
+    background-color: white;
+}
+.navbar-default .navbar-nav>.dropdown>a .caret {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #428bca;
+    white-space: nowrap;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
